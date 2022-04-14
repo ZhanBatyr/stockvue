@@ -3,6 +3,7 @@ import Index from "../views/Index"
 import AuthLogin from "../views/Auth/Login"
 import AuthRegister from "../views/Auth/Register"
 import Register from "../views/Market/Register"
+import Test from "../views/Test"
 import guest from "../middleware/guest"
 //import auth from "../middleware/auth"
 import anon from "../middleware/anon"
@@ -14,6 +15,14 @@ const routes = [
     path: '/',
     name: 'Index',
     component: Index,
+    meta: {
+      middleware: [ guest ]
+    }
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test,
     meta: {
       middleware: [ guest ]
     }
