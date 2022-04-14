@@ -33,7 +33,7 @@
           <nav-item to="Start" icon="fas fa-flag">Начать играть</nav-item>
           <nav-item to="Index" icon="fas fa-dashboard">Главная</nav-item>
         </ul>
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-else>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="!logged">
           <nav-item to="Login" icon="fas fa-sign-in">Войти</nav-item>
           <nav-item to="Register" icon="fas fa-sign-in">Регистрация</nav-item>
         </ul>

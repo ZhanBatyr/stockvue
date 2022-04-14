@@ -115,7 +115,7 @@ export default {
         role: null,
         name: '',
         description: '',
-        sector: null,
+        sector: 28,
         employees: 1,
         commission: 13
       }
@@ -124,6 +124,7 @@ export default {
   methods: {
     async submit() {
       this.form.sector = parseInt(this.form.sector)
+
       await this.axios.post(PREFIX + "/market/register", this.form).then(response => {
         console.log(response.data)
         if (response.status === 200) {
