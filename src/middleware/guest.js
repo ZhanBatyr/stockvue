@@ -1,7 +1,7 @@
 import { notify } from "@kyvg/vue3-notification";
 
 export default function guest ({ next, store }) {
-    if(store.getters.logged && store.getters.guest){
+    if(store.getters.logged && store.getters.role === 'guest'){
         
         notify({
             type: 'error',

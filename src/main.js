@@ -46,11 +46,23 @@ axios.interceptors.response.use(function (response) {
 
             if (errors) {
                 for (const error in errors) {
-                    notify({
-                        title: error,
-                        type: 'error',
-                        text: errors[error]
-                    })
+                    
+                    if (Array.isArray(error)) {
+                        for (const _ in error) {
+                            notify({
+                                title: error,
+                                type: 'error',
+                                text: error[_]
+                            })
+                        }
+                    } else {
+                        notify({
+                            title: error,
+                            type: 'error',
+                            text: errors[error]
+                        })
+                    }
+                    
                 }
             }
         } else {

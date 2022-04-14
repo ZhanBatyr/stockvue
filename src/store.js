@@ -17,7 +17,8 @@ const store = createStore({
     getters: {
         logged: state => state.logged,
         token: state => state.token,
-        guest: state => state.user.guest
+        guest: state => state.user.guest,
+        role: state => state.user.role
     },
     mutations: {
         init(state) {
