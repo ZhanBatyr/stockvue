@@ -5,6 +5,8 @@ import AuthRegister from "../views/Auth/Register"
 import Register from "../views/Market/Register"
 import Test from "../views/Test"
 import guest from "../middleware/guest"
+import PanelForRegistrar from "../views/Registrar/PanelForRegistrar"
+import Registries from "../views/Registrar/Registries"
 //import auth from "../middleware/auth"
 import anon from "../middleware/anon"
 import store from "../store"
@@ -34,6 +36,20 @@ const routes = [
     meta: {
       
     }
+  },
+  {
+    path: '/panel-for-registrar',
+    name: 'panelForRegistrar',
+    component: PanelForRegistrar
+  },
+  {
+    path: '/registries',
+    name: 'registries',
+    component: Registries
+  },
+  {
+    path: '/registries/:ticker',
+    component: () => import("../views/Registrar/IssuerRegister")
   },
   {
     path: '/auth/login',

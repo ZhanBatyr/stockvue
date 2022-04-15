@@ -21,9 +21,13 @@
     </router-link>
     <div class="sidebar">
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role !== 'guest'">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role !== 'guest' && user.role !== 'registrar'">
           <nav-item to="Index" icon="fas fa-dashboard">Главная</nav-item>
           <nav-item to="Test" icon="fas fa-dashboard">Тест</nav-item>
+        </ul>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role === 'registrar'">
+          <nav-item to="panelForRegistrar" icon="fas fa-dashboard">Заявки</nav-item>
+          <nav-item to="registries" icon="fas fa-dashboard">Реестр</nav-item>
         </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role === 'guest'">
           <nav-item to="Start" icon="fas fa-flag">Начать играть</nav-item>

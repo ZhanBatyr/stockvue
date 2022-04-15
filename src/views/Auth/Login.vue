@@ -53,7 +53,11 @@ export default {
           this.$store.commit('setToken', response.data.token)
           this.$store.commit('setUser', response.data)
           this.$notify({ type: 'success', title: 'Добро пожаловать!', text: 'Вы успешно вошли в аккаунт!' })
-          this.$router.push({ name: 'Index' })
+          if (this.$store.state.user.role === 'registrar') {
+            this.$router.push({ name: 'panelForRegistrar' })
+          } else {
+            this.$router.push({ name: 'Index' })
+          }
         }
       }).catch(response => console.log(response))
     },

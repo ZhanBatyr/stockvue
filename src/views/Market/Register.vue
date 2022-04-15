@@ -12,6 +12,7 @@
             <option value="company">Компания-эмитент</option>
             <option value="broker">Брокер</option>
             <option value="dealer">Дилер</option>
+            <option value="registrar">Регистратор</option>
           </select>
         </div>
 
@@ -28,6 +29,11 @@
         <div class="callout callout-warning" v-show="form.role === 'dealer'">
           <h5>Дилер</h5>
           <p>Дилеры — это люди или фирмы, которые покупают и продают ценные бумаги за свой счет, будь то через брокера или иным образом. Дилер действует как принципал в торговле за свой счет, в отличие от брокера, который действует как агент, выполняющий заказы от имени своих клиентов.</p>
+        </div>
+
+        <div class="callout callout-warning" v-show="form.role === 'registrar'">
+          <h5>Регистратор</h5>
+          <p>Регистратор — это (держатель реестра) по заданию эмитента ведет учет(реестр) владельцев ценных бумаг эмитента.</p>
         </div>
         
       </div>
@@ -99,6 +105,19 @@
       </div>
     </div>
 
+    <div class="card" v-show="form.role === 'registrar'">
+      <div class="card-header">
+        <p class="card-title">Регистратор</p>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label>Коммиссия (фиксированная)</label>
+          <input v-model="form.commission" type="number" min="1" name="commission" class="form-control" required>
+          <small class="form-text text-muted">Комиссия(фиксированная) — держатель реестра имеет право взимать со сторон по сделке плату, которая определяется числом распоряжений о передаче прав и одинакова для всех юридических и физических лиц, <strong>но не может назначаться в виде процента от объема операции</strong>.</small>
+        </div>
+      </div>
+    </div>
+
     <button class="btn btn-success" v-if="form.role != null" @click="submit">Продолжить</button>
     
   </div>
@@ -117,7 +136,7 @@ export default {
         description: '',
         sector: 28,
         employees: 1,
-        commission: 13
+        commission: 0
       }
     }
   },
@@ -130,7 +149,11 @@ export default {
         if (response.status === 200) {
           this.$store.commit('setUser', response.data)
           this.$notify({ type: 'success', title: 'Добро пожаловать!', text: 'Вы успешно зарегистрировались!' })
-          this.$router.push({ name: 'Index' })
+          if (this.$store.state.user.role === 'registrar') {
+            this.$router.push({ name: 'panelForRegistrar' })
+          } else {
+            this.$router.push({ name: 'Index' })
+          }
         }
       }).catch(error => console.log(error))
     }

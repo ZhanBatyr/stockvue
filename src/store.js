@@ -42,8 +42,8 @@ const store = createStore({
         setUser(state, data) {
             state.user.username = data.user.username
             state.user.email = data.user.email
-            state.user.role = data.user.isGuest ? 'guest' : 'none'
-            state.user.guest = data.user.isGuest
+            state.user.role = data.user.isGuest ? 'guest' : data.user.role
+            state.user.guest = data.user.isGuest ? 'guest' : 'none'
             localStorage.setItem('user.username', data.user.username)
             localStorage.setItem('user.email', data.user.email)
             localStorage.setItem('user.role', data.user.role)
