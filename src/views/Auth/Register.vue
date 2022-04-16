@@ -2,7 +2,7 @@
   <div class="login-page">
     <div class="card card-outline card-orange" style="min-width: 360px">
       <div class="card-header text-center">
-        <router-link :to="{ name: 'Login' }" class="h1"><b>Stock</b>App</router-link>
+        <router-link :to="{ name: 'Login' }" class="h1"><b>Game</b>Stock</router-link>
       </div>
       <div class="card-body">
         <form @submit.prevent="submit">
@@ -61,7 +61,7 @@ export default {
         if (response.status === 200) {
           this.$store.commit('setToken', response.data.token)
           this.$store.commit('setUser', response.data)
-          this.$notify({ type: 'success', title: 'Добро пожаловать!', text: 'Вы успешно зарегистрировались!' })
+          this.$notify({ type: 'success', title: 'Қош келдіңіз!', text: 'Сіз сайтқа сәтті кірдіңіз!' })
           this.$router.push({ name: 'Index' })
         }
       }).catch(response => console.log(response))

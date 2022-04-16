@@ -3,8 +3,9 @@ import Index from "../views/Index"
 import AuthLogin from "../views/Auth/Login"
 import AuthRegister from "../views/Auth/Register"
 import Register from "../views/Market/Register"
-import Test from "../views/Test"
 import guest from "../middleware/guest"
+import Companies from "../views/Company/Index"
+import CompanyProfile from "../views/Company/Profile"
 //import auth from "../middleware/auth"
 import anon from "../middleware/anon"
 import store from "../store"
@@ -20,9 +21,17 @@ const routes = [
     }
   },
   {
-    path: '/test',
-    name: 'Test',
-    component: Test,
+    path: '/companies',
+    name: 'Companies',
+    component: Companies,
+    meta: {
+      middleware: [ guest ]
+    }
+  },
+  {
+    path: '/companies/:id/',
+    name: 'CompanyProfile',
+    component: CompanyProfile,
     meta: {
       middleware: [ guest ]
     }

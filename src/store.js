@@ -10,7 +10,9 @@ const store = createStore({
                 username: '',
                 email: '',
                 guest: '',
-                role: ''
+                role: '',
+                id: '',
+                companyId: ''
             }
         }
     },
@@ -18,7 +20,8 @@ const store = createStore({
         logged: state => state.logged,
         token: state => state.token,
         guest: state => state.user.guest,
-        role: state => state.user.role
+        role: state => state.user.role,
+        user: state => state.user
     },
     mutations: {
         init(state) {
@@ -30,6 +33,8 @@ const store = createStore({
                     state.user.email = localStorage.getItem('user.email')
                     state.user.guest = localStorage.getItem('user.guest')
                     state.user.role = localStorage.getItem('user.role')
+                    state.user.id = localStorage.getItem('user.id')
+                    state.user.companyId = localStorage.getItem('user.companyId')
                 }
                 state.init = true
             }
@@ -44,10 +49,18 @@ const store = createStore({
             state.user.email = data.user.email
             state.user.role = data.user.isGuest ? 'guest' : 'none'
             state.user.guest = data.user.isGuest
+            state.user.id = data.user.id
+            state.user.companyId = data.user.companyId
             localStorage.setItem('user.username', data.user.username)
             localStorage.setItem('user.email', data.user.email)
             localStorage.setItem('user.role', data.user.role)
             localStorage.setItem('user.guest', data.user.guest)
+            localStorage.setItem('user.id', data.user.id)
+            localStorage.setItem('user.companyId', data.user.companyId)
+        },
+        setCompany(state, data) {
+            state.user.companyId = data.company.id
+            localStorage.setItem('user.companyId', data.company.id)
         },
         logout(state) {
             state.token = ''
@@ -55,12 +68,16 @@ const store = createStore({
             state.user.role = ''
             state.user.guest = ''
             state.user.email = ''
+            state.user.id = ''
+            state.user.companyId = ''
             state.logged = false
             localStorage.removeItem('token')
             localStorage.removeItem('user.username')
             localStorage.removeItem('user.email')
             localStorage.removeItem('user.role')
             localStorage.removeItem('user.guest')
+            localStorage.removeItem('user.id')
+            localStorage.removeItem('user.companyId')
         }
     }
 })
