@@ -1,3 +1,4 @@
+// eslint-disable
 <template>
     <div class="main content p-3">
         <div class="row">
@@ -16,8 +17,8 @@
                     <input type="text" readonly class="form-control form-control-border" v-model="user.role">
                   </div>
                   <div class="form-group">
-                    <label>Аккаунт бағасы</label>
-                    <input type="text" readonly class="form-control form-control-border" v-model="user.netWorth">
+                    <label>Аккаунтағы сомма</label>
+                    <input :style="{ color: user?.transactions?.at(-1)?.change === '+' ? 'green' : 'red' }" type="text" readonly class="form-control form-control-border" :value="user.account?.amount">
                     <small class="text-form text-muted">тенге</small>
                   </div>
                 </div>
@@ -31,7 +32,7 @@
                 </p>
               </div>
               <div class="card-body">
-                
+                <canvas ref="transactions" id="transactions"></canvas>
               </div>
             </div>
           </div>
@@ -63,14 +64,42 @@ export default {
     }
   },
   mounted() {
-   console.log(this.$store.getters.user)
     this.getUser()
+  },
+  updated() {
+    const ctx = document.getElementById('transactions').getContext('2d');
+    
+    const dates = []
+    this.user?.transactions?.forEach(x => dates.push(new Date(Date.parse(x.transactionAt)).toLocaleDateString() + " " + new Date(Date.parse(x.transactionAt)).toLocaleTimeString()))
+    
+    const amounts = []
+    this.user?.transactions?.forEach(x => amounts.push(x.amount))
+    
+    console.log(dates)
+    
+    const data = {
+      labels: dates,
+      datasets: [{
+        label: 'Account',
+        data: amounts,
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1
+      }]
+    };
+    const config = {
+      type: 'line',
+      data: data,
+    };
+    const myChart = new Chart(ctx, config)
   },
   methods: {
     async getUser() {
       await this.axios.get(PREFIX + "/users/" + this.$store.state.user.id).then(response => {
         if(response.status === 200) {
           this.user = response.data.user
+          this.user.account = response.data.account
+          this.user.transactions = response.data.transactions
         }
       })
     }

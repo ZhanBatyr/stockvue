@@ -50,18 +50,9 @@
         </div>
         <div class="form-group">
           <label for="sector">Сектор</label>
-          <select v-model="form.sector" class="form-control" name="sector" id="sector" required>
-            <option value="28">Ақпараттық технологиялар</option>
-            <option value="13">Денсаулық сақтау</option>
-            <option value="12">Тұтынушының қалауы</option>
-            <option value="11">Қаржы</option>
-            <option value="10">Байланыс қызметтері</option>
-            <option value="8">Индустриялық</option>
-            <option value="6">Тұтыну тауарлары</option>
-            <option value="4">Энергия</option>
-            <option value="3">Меншік</option>
-            <option value="2">Материалдар</option>
-            <option value="1">Утилиталар</option>
+          <select v-model="form.sectorId" class="form-control" name="sector" id="sector" required>
+            <option :value="null">Сектор таңдаңыз</option>
+            <option v-for="sector in sectors" :key="sector.id" :value="sector.id">{{ sector.name }}</option>
           </select>
           <small class="form-text text-muted">Сектор - бұл компаниялар бірдей немесе байланысты әрекеттерді, өнімдерді немесе қызметтерді бөлісетін экономика саласы.</small>
         </div>
@@ -115,19 +106,18 @@ export default {
         role: null,
         name: '',
         description: '',
-        sector: 28,
+        sectorId: 1,
         employees: 1,
         commission: 13
-      }
+      },
+      sectors: {}
     }
   },
   methods: {
     async submit() {
-      this.form.sector = parseInt(this.form.sector)
-
       await this.axios.post(PREFIX + "/market/register", this.form).then(response => {
-        console.log(response.data)
         if (response.status === 200) {
+          console.log(response.data)
           this.$store.commit('setUser', response.data)
           
           if (response.data.company) {
@@ -138,10 +128,18 @@ export default {
           this.$router.push({ name: 'Index' })
         }
       }).catch(error => console.log(error))
+    },
+    async get() {
+      await this.axios.get(PREFIX + "/sectors").then(response => {
+        if (response.status === 200) {
+          this.sectors = response.data
+          this.form.sectorId = this.sectors[0].id
+        }
+      })
     }
   },
   mounted() {
-    console.log(this.$store.state.user)
+    this.get()
   }
 }
 </script>

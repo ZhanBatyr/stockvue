@@ -13,19 +13,15 @@
             <th>Компания туралы</th>
             <th>Сектор</th>
             <th>Капитализация</th>
-            <th></th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="company in companies" :key="company.id">
+          <tr v-for="(company, index) in companies" :key="index">
             <td>{{ company.id }}</td>
             <td>{{ company.name }}</td>
             <td>{{ company.description }}</td>
-            <td>{{ company.sector }}</td>
-            <td>{{ (Math.floor(Math.random() * 101) + 1) * 100_000 }}</td>
-            <td>
-              <router-link :to="{ name: 'CompanyProfile', params: { id: company.id } }" class="btn btn-success">Толығырақ</router-link>
-            </td>
+            <td>{{ sectors?.at(index)?.name }}</td>
+            <td>{{ accounts?.at(index)?.amount }}</td>
           </tr>
           </tbody>
         </table>
@@ -41,7 +37,9 @@ export default {
   name: "Index",
   data() {
     return {
-      companies: {}
+      companies: {},
+      accounts: {},
+      sectors: {}
     }
   },
   methods: {
@@ -49,6 +47,8 @@ export default {
       await this.axios.get(PREFIX + "/companies").then(response => {
         if (response.status === 200) {
           this.companies = response.data.companies
+          this.accounts = response.data.accounts
+          this.sectors = response.data.sectors
         }
       })
     }

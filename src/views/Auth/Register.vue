@@ -7,7 +7,7 @@
       <div class="card-body">
         <form @submit.prevent="submit">
           <div class="input-group mb-3">
-            <input type="text" v-model="form.username" class="form-control" placeholder="Имя пользователя">
+            <input type="text" v-model="form.username" class="form-control" placeholder="Қолданушы аты">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -15,7 +15,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="email" v-model="form.email" class="form-control" placeholder="Почта">
+            <input type="email" v-model="form.email" class="form-control" placeholder="Электронды пошта">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" v-model="form.password" class="form-control" placeholder="Пароль">
+            <input type="password" v-model="form.password" class="form-control" placeholder="Құпиясөз">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>

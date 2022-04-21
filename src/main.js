@@ -8,6 +8,7 @@ import Notifications from '@kyvg/vue3-notification'
 import store from "./store";
 import NavItem from "./components/NavItem"
 import { notify } from "@kyvg/vue3-notification";
+import VueApexCharts from "vue3-apexcharts";
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -83,6 +84,7 @@ app.use(VueAxios, axios)
 app.use(Notifications)
 app.use(CKEditor)
 app.use(store)
+app.use(VueApexCharts)
 app.component('nav-item', NavItem)
 
 store.commit('init')

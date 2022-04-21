@@ -53,6 +53,11 @@ export default {
           console.log(response.data)
           this.$store.commit('setToken', response.data.token)
           this.$store.commit('setUser', response.data)
+
+          if (response.data.company) {
+            this.$store.commit('setCompany', response.data)
+          }
+          
           this.$notify({ type: 'success', title: 'Қош келдіңіз!', text: 'Сіз аккаунтқа сәтті кірдіңіз!' })
           this.$router.push({ name: 'Index' })
         }

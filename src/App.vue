@@ -22,28 +22,30 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role !== 'guest'">
           <nav-item :to="{ name: 'Index' }" icon="fas fa-dashboard">Басты бет</nav-item>
+          <nav-item :to="{ name: 'Transactions' }" icon="fas fa-dollar">Транзакциялар</nav-item>
           <nav-item :to="{ name: 'Companies' }" icon="fas fa-building">Компаниялар</nav-item>
-          <nav-item :to="{ name: 'Companies' }" icon="fas fa-arrow-trend-up">Бағалы қағаздар</nav-item>
+          <nav-item :to="{ name: 'Quotes' }" icon="fas fa-arrow-trend-up">Бағалы қағаздар</nav-item>
           <li class="nav-header" v-if="user.role === 'company'">Компания</li>
           <nav-item :to="{ name: 'CompanyProfile', params: { id: user.companyId } }" v-if="user.role === 'company'" icon="fas fa-building">Менің компаниям</nav-item>
+          <li class="nav-header" v-if="user.role === 'broker'">Брокер</li>
+          <nav-item :to="{ name: 'Orders' }" v-if="user.role === 'broker'" icon="fas fa-building">Тапсырыстар</nav-item>
         </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role === 'guest'">
-          <nav-item to="Start" icon="fas fa-flag">Ойынды бастау</nav-item>
-          <nav-item to="Index" icon="fas fa-dashboard">Басты бет</nav-item>
-          <nav-item to="Companies" icon="fas fa-building">Компаниялар</nav-item>
+          <nav-item :to="{ name: 'Start' }" icon="fas fa-flag">Ойынды бастау</nav-item>
+          <nav-item :to="{ name: 'Companies' }" icon="fas fa-building">Компаниялар</nav-item>
+          <nav-item :to="{ name: 'Sectors' }" icon="fas fa-chart-pie">Секторлар</nav-item>
+          <nav-item :to="{ name: 'Quotes' }" icon="fas fa-arrow-trend-up">Бағалы қағаздар</nav-item>
         </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="!logged">
-          <nav-item to="Login" icon="fas fa-sign-in">Кіру</nav-item>
-          <nav-item to="Register" icon="fas fa-sign-in">Тіркелу</nav-item>
+          <nav-item :to="{ name: 'Login' }" icon="fas fa-sign-in">Кіру</nav-item>
+          <nav-item :to="{ name: 'Register' }" icon="fas fa-sign-in">Тіркелу</nav-item>
         </ul>
       </nav>
     </div>
   </aside>
   <div class="content-wrapper">
     <notifications />
-    <router-view v-slot="{ Component }">
-      <component :is="Component" />
-    </router-view>
+    <router-view></router-view>
   </div>
   <footer class="main-footer">
     <strong>StockApp &copy; 2022</strong>
