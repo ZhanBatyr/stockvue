@@ -45,7 +45,45 @@
               </div>
               <div class="card-body p-0">
                 <table class="table table-striped">
-                  
+                  <tr>
+                    <th>Акция</th>
+                    <th>Саны</th>
+                  </tr>
+                  <tr v-for="stock in stocks" :key="stock">
+                    <td>{{ stock?.quote?.symbol }}</td>
+                    <td>{{ stock?.qty }}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-12" v-if="user.role !== 'broker'">
+            <div class="card" >
+              <div class="card-header">
+                <p class="card-title">
+                  Қолданушы тапсырыстары
+                </p>
+              </div>
+              <div class="card-body p-0">
+                <table class="table table-striped">
+                  <tr>
+                    <th>ID</th>
+                    <th>Типі</th>
+                    <th>Акция</th>
+                    <th>Саны</th>
+                    <th>Мерзімі</th>
+                    <th>Әрекет</th>
+                  </tr>
+                  <tr v-for="order in orders" :class="{ 'bg-red': !order.isActive }" :key="order.id">
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.type === 0 ? 'Сатып алу' : 'Сату' }}</td>
+                    <td>{{ order.quote?.symbol }}</td>
+                    <td>{{ order.numberOfShares }}</td>
+                    <td>{{ new Date(Date.parse(order.placedAt)).toLocaleDateString() }}</td>
+                    <td>
+                      <button @click="closeOrder(order.id)" v-if="order.isActive" class="btn btn-success">Жабу</button>
+                    </td>
+                  </tr>
                 </table>
               </div>
             </div>
@@ -60,11 +98,15 @@ export default {
   name: "Index",
   data() {
     return {
-     user: {}
+      user: {},
+      orders: {},
+      stocks: {}
     }
   },
   mounted() {
     this.getUser()
+    this.getOrders()
+    this.getStocks()
   },
   updated() {
     const ctx = document.getElementById('transactions').getContext('2d');
@@ -100,6 +142,30 @@ export default {
           this.user = response.data.user
           this.user.account = response.data.account
           this.user.transactions = response.data.transactions
+        }
+      })
+    },
+    async getOrders() {
+      await this.axios.get(PREFIX + "/orders/user/" + this.$store.state.user.id).then(response => {
+        if (response.status === 200) {
+          this.orders = response.data.orders
+        }
+      })
+    },
+    async closeOrder(order_id) {
+      await this.axios.post(PREFIX + "/market/" + order_id + "/cancel").then(response => {
+        if (response.status === 200) {
+          this.$notify({
+            type: 'success',
+            title: 'Тапсырыс сәтті жабылды!'
+          })
+        }
+      })
+    },
+    async getStocks() {
+      await this.axios.get(PREFIX + "/stocks/user/" + this.$store.state.user.id).then(response => {
+        if (response.status === 200) {
+          this.stocks = response.data.stocks
         }
       })
     }

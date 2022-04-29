@@ -12,6 +12,7 @@
             <th>Символ</th>
             <th>Компания</th>
             <th>Бағасы</th>
+            <th>Саны</th>
             <th>Low</th>
             <th>High</th>
             <th>Open</th>
@@ -24,6 +25,7 @@
             <td>{{ item.symbol }}</td>
             <td>{{ companies?.at(index)?.name }}</td>
             <td>{{ item.price }}</td>
+            <td>{{ item.numberOfShares }}</td>
             <td>{{ item.low }}</td>
             <td>{{ item.high }}</td>
             <td>{{ item.open }}</td>

@@ -22,13 +22,18 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role !== 'guest'">
           <nav-item :to="{ name: 'Index' }" icon="fas fa-dashboard">Басты бет</nav-item>
-          <nav-item :to="{ name: 'Transactions' }" icon="fas fa-dollar">Транзакциялар</nav-item>
           <nav-item :to="{ name: 'Companies' }" icon="fas fa-building">Компаниялар</nav-item>
           <nav-item :to="{ name: 'Quotes' }" icon="fas fa-arrow-trend-up">Бағалы қағаздар</nav-item>
+          <nav-item :to="{ name: 'Sectors' }" icon="fas fa-chart-pie">Секторлар</nav-item>
           <li class="nav-header" v-if="user.role === 'company'">Компания</li>
           <nav-item :to="{ name: 'CompanyProfile', params: { id: user.companyId } }" v-if="user.role === 'company'" icon="fas fa-building">Менің компаниям</nav-item>
           <li class="nav-header" v-if="user.role === 'broker'">Брокер</li>
-          <nav-item :to="{ name: 'Orders' }" v-if="user.role === 'broker'" icon="fas fa-building">Тапсырыстар</nav-item>
+          <nav-item :to="{ name: 'Orders' }" v-if="user.role === 'broker'" icon="fas fa-briefcase">Менің тапсырыстарым</nav-item>
+
+          <li class="nav-header">Инвест. банк</li>
+          <nav-item :to="{ name: 'Transactions' }" icon="fas fa-dollar">Транзакциялар</nav-item>
+          <nav-item :to="{ name: 'Credits' }" icon="fas fa-dollar">Кредиттер</nav-item>
+
         </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role === 'guest'">
           <nav-item :to="{ name: 'Start' }" icon="fas fa-flag">Ойынды бастау</nav-item>
@@ -54,6 +59,7 @@
 
 <script>
 import NavItem from "./components/NavItem";
+import { useSignalR } from '@dreamonkey/vue-signalr';
 export default {
   name: "App",
   components: {NavItem},
@@ -68,6 +74,16 @@ export default {
         this.$router.push({ name: 'Login' })
       }
     }
+  },
+  updated() {
+    const signalR = useSignalR()
+
+    signalR.on('NewQuote', ({message}) => {
+      this.$notify({
+        type: 'info',
+        title: 'Жаңа акция жарияланды!'
+      })
+    })
   }
 };
 </script>

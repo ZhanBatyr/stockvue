@@ -5,8 +5,14 @@ import AuthRegister from "../views/Auth/Register"
 import Register from "../views/Market/Register"
 import guest from "../middleware/guest"
 import Companies from "../views/Company/Index"
+
 import Orders from "../views/Order/Index"
-import Transactions from "../views/Transactions/Index"
+import ConfirmOrder from "../views/Order/Confirm"
+
+import Transactions from "../views/Bank/Transactions"
+import Credits from "../views/Bank/Credits"
+import Credit from "../views/Bank/Credit"
+
 import Sectors from "../views/Sector/Index"
 import Quotes from "../views/Quote/Index"
 import CompanyProfile from "../views/Company/Profile"
@@ -41,6 +47,14 @@ const routes = [
     }
   },
   {
+    path: '/orders/:id/confirmation',
+    name: 'ConfirmOrder',
+    component: ConfirmOrder,
+    meta: {
+      middleware: [ guest ]
+    }
+  },
+  {
     path: '/quotes',
     name: 'Quotes',
     component: Quotes,
@@ -52,6 +66,22 @@ const routes = [
     path: '/transactions',
     name: 'Transactions',
     component: Transactions,
+    meta: {
+      middleware: [ guest ]
+    }
+  },
+  {
+    path: '/credits',
+    name: 'Credits',
+    component: Credits,
+    meta: {
+      middleware: [ guest ]
+    }
+  },
+  {
+    path: '/credit',
+    name: 'Credit',
+    component: Credit,
     meta: {
       middleware: [ guest ]
     }

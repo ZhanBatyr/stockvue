@@ -13,6 +13,7 @@
             <th>Компания туралы</th>
             <th>Сектор</th>
             <th>Капитализация</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
@@ -22,6 +23,9 @@
             <td>{{ company.description }}</td>
             <td>{{ sectors?.at(index)?.name }}</td>
             <td>{{ accounts?.at(index)?.amount }}</td>
+            <td>
+              <router-link :to="{ name: 'CompanyProfile', params: { id: company.id } }" class="btn btn-success">Профиль</router-link>
+            </td>
           </tr>
           </tbody>
         </table>

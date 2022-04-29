@@ -1,5 +1,5 @@
 ﻿<template>
-  <div class="companies content p-3">
+  <div class="content p-3">
     <div class="card">
       <div class="card-header">
         <p class="card-title">Транзакциялар</p>
@@ -17,7 +17,7 @@
           <tbody>
           <tr v-for="item in transactions" :class="{'bg-green': item.change === '+', 'bg-red': item.change === '-'}" :key="item.id">
             <td>{{ item.id }}</td>
-            <td>{{ item.amount }}</td>
+            <td>{{ (item.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }}</td>
             <td>{{ item.change }}</td>
             <td>{{ new Date(Date.parse(item.transactionAt)).toLocaleDateString() + " " + new Date(Date.parse(item.transactionAt)).toLocaleTimeString() }}</td>
           </tr>

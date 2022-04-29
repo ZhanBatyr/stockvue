@@ -9,6 +9,9 @@ import store from "./store";
 import NavItem from "./components/NavItem"
 import { notify } from "@kyvg/vue3-notification";
 import VueApexCharts from "vue3-apexcharts";
+import { VueSignalR } from '@dreamonkey/vue-signalr';
+import { HubConnectionBuilder } from '@microsoft/signalr';
+import {URL} from "@/api";
 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -79,12 +82,17 @@ axios.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
+const connection = new HubConnectionBuilder()
+    .withUrl(URL + '/markethub')
+    .build();
+
 const app = createApp(App).use(router)
 app.use(VueAxios, axios)
 app.use(Notifications)
 app.use(CKEditor)
 app.use(store)
 app.use(VueApexCharts)
+app.use(VueSignalR, { connection })
 app.component('nav-item', NavItem)
 
 store.commit('init')

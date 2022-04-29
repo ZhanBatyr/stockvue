@@ -10,7 +10,9 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^32.0.0",
     "@ckeditor/ckeditor5-vue": "^2.0.1",
+    "@dreamonkey/vue-signalr": "^1.0.1",
     "@kyvg/vue3-notification": "^2.3.4",
+    "@microsoft/signalr": "^6.0.4",
     "apexcharts": "^3.35.0",
     "axios": "^0.25.0",
     "bootstrap": "^5.1.3",
