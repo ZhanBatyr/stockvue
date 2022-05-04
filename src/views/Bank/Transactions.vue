@@ -9,6 +9,7 @@
           <thead>
           <tr>
             <th>ID</th>
+            <th>Өзгеріс суммасы</th>
             <th>Сумма</th>
             <th>Өзгеріс</th>
             <th>Дата</th>
@@ -17,6 +18,7 @@
           <tbody>
           <tr v-for="item in transactions" :class="{'bg-green': item.change === '+', 'bg-red': item.change === '-'}" :key="item.id">
             <td>{{ item.id }}</td>
+            <td>{{ item.change + (item.changeAmount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }}</td>
             <td>{{ (item.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') }}</td>
             <td>{{ item.change }}</td>
             <td>{{ new Date(Date.parse(item.transactionAt)).toLocaleDateString() + " " + new Date(Date.parse(item.transactionAt)).toLocaleTimeString() }}</td>

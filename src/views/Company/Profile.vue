@@ -112,6 +112,10 @@ export default {
     },
     async placeOrder() {
       this.order.quoteId = this.company?.quote?.id
+      
+      if (this.$store.state.user.role === 'dealer')
+        this.order.brokerId = this.$store.state.user.id
+      
       await this.axios.post(PREFIX + "/market/" + this.company?.quote?.id + "/order", this.order).then(response => {
         if (response.status === 200) {
           const order = response.data.order
@@ -182,12 +186,12 @@ export default {
             <div class="col-6">
               <div class="form-group">
                 <label>Акция саны</label>
-                <input type="number" min="1" v-model="order.numberOfShares" :max="company?.quote?.numberOfShares" class="form-control">
-                <small class="form-text text-muted">Акциялар саны: {{ company?.quote?.numberOfShares }}</small>
+                <input type="number" min="1" v-model="order.numberOfShares" :max="company?.quote?.inTradeNumberOfShares" class="form-control">
+                <small class="form-text text-muted">Акциялар саны: {{ company?.quote?.inTradeNumberOfShares }}</small>
               </div>
             </div>
             <div class="col-12">
-              <div class="form-group">
+              <div v-if="user.role === 'company'" class="form-group">
                 <label>Брокер</label>
                 <select v-model="order.brokerId" class="form-control">
                   <option :value="null">Брокерді таңдаңыз</option>

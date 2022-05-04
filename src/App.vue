@@ -34,6 +34,10 @@
           <nav-item :to="{ name: 'Transactions' }" icon="fas fa-dollar">Транзакциялар</nav-item>
           <nav-item :to="{ name: 'Credits' }" icon="fas fa-dollar">Кредиттер</nav-item>
 
+          <li class="nav-header">Регистратор</li>
+          <nav-item :to="{ name: 'Movements' }" icon="fas fa-arrow-right">Акциялар қозғалысы</nav-item>
+          <nav-item :to="{ name: 'Movements' }" icon="fas fa-briefcase">Бағалар тарихы</nav-item>
+
         </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role === 'guest'">
           <nav-item :to="{ name: 'Start' }" icon="fas fa-flag">Ойынды бастау</nav-item>

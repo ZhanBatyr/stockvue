@@ -17,6 +17,7 @@
             <th>High</th>
             <th>Open</th>
             <th>Close</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
@@ -25,11 +26,12 @@
             <td>{{ item.symbol }}</td>
             <td>{{ companies?.at(index)?.name }}</td>
             <td>{{ item.price }}</td>
-            <td>{{ item.numberOfShares }}</td>
+            <td>{{ item.inTradeNumberOfShares }} / {{ item.numberOfShares }}</td>
             <td>{{ item.low }}</td>
             <td>{{ item.high }}</td>
             <td>{{ item.open }}</td>
             <td>{{ item.close }}</td>
+            <td><router-link class="btn btn-success" :to="{ name: 'CompanyProfile', params: { id: companies?.at(index)?.id } }">Профиль</router-link></td>
           </tr>
           </tbody>
         </table>

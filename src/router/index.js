@@ -13,6 +13,8 @@ import Transactions from "../views/Bank/Transactions"
 import Credits from "../views/Bank/Credits"
 import Credit from "../views/Bank/Credit"
 
+import Movements from "../views/Movement/Index"
+
 import Sectors from "../views/Sector/Index"
 import Quotes from "../views/Quote/Index"
 import CompanyProfile from "../views/Company/Profile"
@@ -58,6 +60,14 @@ const routes = [
     path: '/quotes',
     name: 'Quotes',
     component: Quotes,
+    meta: {
+
+    }
+  },
+  {
+    path: '/movements',
+    name: 'Movements',
+    component: Movements,
     meta: {
 
     }
