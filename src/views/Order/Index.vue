@@ -18,7 +18,9 @@
             <td>{{ order.type === 0 ? 'Сатып алу' : 'Сату' }}</td>
             <td>{{ order.quoteId }}</td>
             <td>{{ order.numberOfShares }}</td>
-            <td></td>
+            <td>
+              <button @click="closeOrder(order.id)" class="btn btn-success">Жабу</button>
+            </td>
           </tr>
         </table>
       </div>
@@ -41,6 +43,17 @@ export default {
       await this.axios.get(PREFIX + "/orders/active").then(response => {
         if (response.status === 200) {
           this.orders = response.data.orders
+        }
+      })
+    },
+    async closeOrder(orderId) {
+      await this.axios.post(PREFIX + "/market/" + orderId + "/close").then(response => {
+        if (response.status === 200) {
+          this.$notify({
+            type: "success",
+            title: "Тапсырыс сәтті жабылды!"
+          })
+          this.$router.go(0)
         }
       })
     }
