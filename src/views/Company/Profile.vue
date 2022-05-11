@@ -26,7 +26,8 @@ export default {
         type: 0,
         brokerId: null
       },
-      brokers: {}
+      brokers: {},
+      stocksCount: 0
     }
   },
   methods: {
@@ -36,6 +37,7 @@ export default {
           this.company = response.data.company
           this.company.quote = response.data.quote
           this.snapshots = response.data.snapshots
+          this.stocksCount = response.data.stocks
           
           if (this.company.quote) {
             this.chart.options = {
@@ -68,7 +70,7 @@ export default {
             if (this.snapshots) {
               for (const snapshot of this.snapshots) {
                 data.push({
-                  x: new Date(Date.parse(snapshot.date)),
+                  x: Date.parse(snapshot.date),
                   y: [snapshot.open, snapshot.high, snapshot.low, snapshot.close]
                 })
               }
@@ -119,6 +121,15 @@ export default {
       await this.axios.post(PREFIX + "/market/" + this.company?.quote?.id + "/order", this.order).then(response => {
         if (response.status === 200) {
           const order = response.data.order
+          
+          if (response.data?.sale === true) {
+            this.$router.go(0)
+            this.$notify({
+              type: "success",
+              title: "Акциялар сатылымға сәтті қойылды"
+            })
+          }
+          
           this.$router.push({ name: 'ConfirmOrder', params: { id: order.id } })
         }
       })
@@ -151,15 +162,15 @@ export default {
       <div class="card-body">
         <form @submit.prevent="updateCompany">
           <div class="form-group">
-            <label>Название</label>
+            <label>Аты</label>
             <input type="text" :readonly="company.id !== user.companyId" v-model="company.name" class="form-control">
           </div>
           <div class="form-group">
-            <label>Описание</label>
+            <label>Сипаттамасы</label>
             <input type="text" :readonly="company.id !== user.companyId" v-model="company.description" class="form-control">
           </div>
           <div class="form-group">
-            <label>Количество сотрудников</label>
+            <label>Жұмысшылар саны</label>
             <input type="text" :readonly="company.id !== user.companyId" v-model="company.employees" class="form-control">
           </div>
           <button  v-show="company.id === user.companyId" class="btn btn-success">Сақтау</button>
@@ -187,7 +198,7 @@ export default {
               <div class="form-group">
                 <label>Акция саны</label>
                 <input type="number" min="1" v-model="order.numberOfShares" :max="company?.quote?.inTradeNumberOfShares" class="form-control">
-                <small class="form-text text-muted">Акциялар саны: {{ company?.quote?.inTradeNumberOfShares }}</small>
+                <small class="form-text text-muted">Акциялар саны: {{ company?.quote?.inTradeNumberOfShares }}. Сіздің акцияларыңыз: {{ stocksCount }}</small>
               </div>
             </div>
             <div class="col-12">

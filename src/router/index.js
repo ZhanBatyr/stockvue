@@ -15,6 +15,8 @@ import Credit from "../views/Bank/Credit"
 
 import Movements from "../views/Movement/Index"
 
+import RegistrarIndex from "../views/Registrar/Index"
+
 import Sectors from "../views/Sector/Index"
 import Quotes from "../views/Quote/Index"
 import CompanyProfile from "../views/Company/Profile"
@@ -60,6 +62,14 @@ const routes = [
     path: '/quotes',
     name: 'Quotes',
     component: Quotes,
+    meta: {
+
+    }
+  },
+  {
+    path: '/registrar',
+    name: 'RegistrarIndex',
+    component: RegistrarIndex,
     meta: {
 
     }

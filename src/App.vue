@@ -10,7 +10,7 @@
         <div class="nav-link">{{ user.username }} ({{ user.role }})</div>
       </li>
       <li class="nav-item" v-if="logged">
-        <a href="#" @click="logout" class="nav-link"><span class="fas fa-sign-out"></span> Выйти</a>
+        <a href="#" @click="logout" class="nav-link"><span class="fas fa-sign-out"></span> Шығу</a>
       </li>
     </ul>
   </nav>
@@ -36,7 +36,7 @@
 
           <li class="nav-header">Регистратор</li>
           <nav-item :to="{ name: 'Movements' }" icon="fas fa-arrow-right">Акциялар қозғалысы</nav-item>
-          <nav-item :to="{ name: 'Movements' }" icon="fas fa-briefcase">Бағалар тарихы</nav-item>
+          <nav-item :to="{ name: 'RegistrarIndex' }" icon="fas fa-briefcase" v-if="user.role === 'registrar'">IPO қабылдау</nav-item>
 
         </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role === 'guest'">

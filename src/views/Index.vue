@@ -25,7 +25,7 @@
               </div>
           </div>
           <div class="col-9">
-            <div class="card">
+            <div class="card" v-if="user.role !== 'registrar'">
               <div class="card-header">
                 <p class="card-title">
                   Аккаунт өзгерісі
@@ -36,7 +36,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12" v-if="user.role !== 'broker'">
+          <div class="col-12" v-if="user.role !== 'broker' && user.role !== 'registrar'">
             <div class="card" >
               <div class="card-header">
                 <p class="card-title">
@@ -57,7 +57,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12" v-if="user.role !== 'broker'">
+          <div class="col-12" v-if="user.role !== 'broker' && user.role !== 'registrar'">
             <div class="card" >
               <div class="card-header">
                 <p class="card-title">

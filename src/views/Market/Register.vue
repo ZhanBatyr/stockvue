@@ -12,6 +12,7 @@
             <option value="company">Компания-эмитент</option>
             <option value="broker">Брокер</option>
             <option value="dealer">Дилер</option>
+            <option value="registrar">Регистратор</option>
           </select>
         </div>
 
