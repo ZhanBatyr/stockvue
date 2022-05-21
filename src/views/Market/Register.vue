@@ -13,6 +13,7 @@
             <option value="broker">Брокер</option>
             <option value="dealer">Дилер</option>
             <option value="registrar">Регистратор</option>
+            <option value="managingCompany">Басқарушы компания</option>
           </select>
         </div>
 
@@ -29,6 +30,11 @@
         <div class="callout callout-warning" v-show="form.role === 'dealer'">
           <h5>Дилер</h5>
           <p>Дилеры - брокер арқылы немесе басқа жолмен болсын, өз шотына бағалы қағаздарды сатып алатын және сататын тұлға немесе фирма. Дилер өз клиенттерінің атынан тапсырыстарды орындайтын агент ретінде әрекет ететін брокерге қарағанда, өз шотындағы сауда-саттықта принципал ретінде әрекет етеді.</p>
+        </div>
+
+        <div class="callout callout-warning" v-show="form.role === 'managingCompany'">
+          <h5>Басқарушы компания</h5>
+          <p>Басқарушы компания – өз атынан және өз шешімімен, бірақ клиенттің немесе клиенттер пулының мүддесін көздейтін мәмілелер жасайтын бағалы қағаздар нарығының кәсіби қатысушысы.</p>
         </div>
         
       </div>
@@ -91,6 +97,37 @@
       </div>
     </div>
 
+    <div class="card" v-show="form.role === 'managingCompany'">
+      <div class="card-header">
+        <p class="card-title">Басқарушы компания</p>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label>Басқарушы компания туралы анықтама</label>
+          <textarea v-model="form.description" class="form-control" name="description" style="height: 100px"></textarea>
+          <small class="form-text text-muted">Анықтама</small>
+        </div>
+        <div class="form-group">
+          <label>Ұсынып отырған стратегия сипаттамасы</label>
+          <textarea v-model="form.strategy" class="form-control" name="strategy" style="height: 100px"></textarea>
+          <small class="form-text text-muted">Стратегия</small>
+        </div>
+        <div class="form-group">
+          <label for="name">Минимум неше жылға ақша салынады</label>
+          <input v-model="form.minYear" type="number" min="1" name="minYear" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Коммиссия %</label>
+          <input v-model="form.commission" type="number" min="1" name="commission" class="form-control" required>
+          <small class="form-text text-muted">Комиссия – басқару ақысының проценті.</small>
+        </div>
+        <div class="form-group">
+          <label>Минимум ақша салу суммасы ₸</label>
+          <input v-model="form.minSumma" type="number" min="1" name="minSumma" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
     <button class="btn btn-success" v-if="form.role != null" @click="submit">Тіркелу</button>
     
   </div>
@@ -109,7 +146,10 @@ export default {
         description: '',
         sectorId: 1,
         employees: 1,
-        commission: 13
+        commission: 13,
+        strategy: '',
+        minYear: 1,
+        minSumma: 10000
       },
       sectors: {}
     }

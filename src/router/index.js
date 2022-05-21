@@ -5,6 +5,10 @@ import AuthRegister from "../views/Auth/Register"
 import Register from "../views/Market/Register"
 import guest from "../middleware/guest"
 import Companies from "../views/Company/Index"
+import QuestionsForManagingCompany from "../views/ManagingCompany/QuestionsForManagingCompany"
+import ManagingCompanies from "../views/ManagingCompany/ManagingCompanies"
+import AboutManagingCompany from "../views/ManagingCompany/AboutManagingCompany"
+import InvestManagingCompany from "../views/ManagingCompany/InvestManagingCompany"
 
 import Orders from "../views/Order/Index"
 import ConfirmOrder from "../views/Order/Confirm"
@@ -40,6 +44,38 @@ const routes = [
     component: Companies,
     meta: {
       
+    }
+  },
+  {
+    path: '/questions-for-managing-company',
+    name: 'QuestionsForManagingCompany',
+    component: QuestionsForManagingCompany,
+    meta: {
+
+    }
+  },
+  {
+    path: '/managing-companies',
+    name: 'ManagingCompanies',
+    component: ManagingCompanies,
+    meta: {
+
+    }
+  },
+  {
+    path: '/about-managing-company',
+    name: 'AboutManagingCompany',
+    component: AboutManagingCompany,
+    meta: {
+
+    }
+  },
+  {
+    path: '/invest-managing-company',
+    name: 'InvestManagingCompany',
+    component: InvestManagingCompany,
+    meta: {
+
     }
   },
   {

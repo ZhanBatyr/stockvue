@@ -38,12 +38,17 @@
           <nav-item :to="{ name: 'Movements' }" icon="fas fa-arrow-right">Акциялар қозғалысы</nav-item>
           <nav-item :to="{ name: 'RegistrarIndex' }" icon="fas fa-briefcase" v-if="user.role === 'registrar'">IPO қабылдау</nav-item>
 
+          <li class="nav-header">Басқарушы комп.</li>
+          <nav-item :to="{ name: 'questionsForManagingCompany' }" icon="fas fa-arrow-right">Жиі қойылатын сұрақтар</nav-item>
+
         </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role === 'guest'">
           <nav-item :to="{ name: 'Start' }" icon="fas fa-flag">Ойынды бастау</nav-item>
           <nav-item :to="{ name: 'Companies' }" icon="fas fa-building">Компаниялар</nav-item>
           <nav-item :to="{ name: 'Sectors' }" icon="fas fa-chart-pie">Секторлар</nav-item>
           <nav-item :to="{ name: 'Quotes' }" icon="fas fa-arrow-trend-up">Бағалы қағаздар</nav-item>
+          <nav-item :to="{ name: 'QuestionsForManagingCompany' }" icon="fas fa-arrow-right">Жиі қойылатын сұрақтар</nav-item>
+          <nav-item :to="{ name: 'ManagingCompanies' }" icon="fas fa-arrow-right">Басқарушы компаниялар</nav-item>
         </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="!logged">
           <nav-item :to="{ name: 'Login' }" icon="fas fa-sign-in">Кіру</nav-item>
