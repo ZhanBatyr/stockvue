@@ -106,7 +106,7 @@ export default {
         {
           date: '2022-03-20',
           ticker: 'KSPI',
-          name: 'Каспи банк',
+          name: 'Каспий банк',
           outputStocks: 6000,
           inputStocks: 14000,
           categoryCompany: 'Информационные технологии',
@@ -144,11 +144,13 @@ export default {
       selectedIndex: null
     }
   },
+  created() {
+    this.selectedApplication = this.applications[0];
+  },
   methods: {
     newApplications() {
-      const sortedApplications = this.applications.sort((a, b) =>
+      this.applications = this.applications.sort((a, b) =>
           new Date(b.date) - new Date(a.date));
-      this.applications = sortedApplications;
     },
     oldApplications() {
       const sortedApplications = this.applications.sort((a, b) =>

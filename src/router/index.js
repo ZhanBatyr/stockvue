@@ -52,6 +52,16 @@ const routes = [
     component: () => import("../views/Registrar/IssuerRegister")
   },
   {
+    path: '/information-center',
+    name: 'informationCenter',
+    component: () => import("../views/Registrar/InformationCenter")
+  },
+  {
+    path: '/admission-rules',
+    name: 'admissionRules',
+    component: () => import("../views/marketOrganizer/AdmissionRules")
+  },
+  {
     path: '/auth/login',
     name: 'Login',
     component: AuthLogin,

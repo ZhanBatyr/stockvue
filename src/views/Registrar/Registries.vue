@@ -51,7 +51,7 @@
             </div>
           </li>
           <li>
-            <div class="mt-2">
+            <div class="mt-2 d-flex justify-content-around">
               <button type="button" class="btn btn-danger" @click="resetData">Сбросить</button>
               <button type="button" class="btn btn-success" @click="findData">Применить</button>
             </div>
@@ -122,7 +122,7 @@ export default {
         {
           date: '2022-03-20',
           ticker: 'KSPI',
-          name: 'Каспи банк',
+          name: 'Каспий банк',
           outputStocks: 6000,
           inputStocks: 14000,
           categoryCompany: 'Информационные технологии',

@@ -60,7 +60,7 @@ export default {
         {
           date: '2022-03-20',
           ticker: 'KSPI',
-          name: 'Каспи банк',
+          name: 'Каспий банк',
           outputStocks: 6000,
           inputStocks: 14000,
           categoryCompany: 'Информационные технологии',

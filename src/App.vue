@@ -26,8 +26,9 @@
           <nav-item to="Test" icon="fas fa-dashboard">Тест</nav-item>
         </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role === 'registrar'">
-          <nav-item to="panelForRegistrar" icon="fas fa-dashboard">Заявки</nav-item>
+          <nav-item to="panelForRegistrar" icon="far fa-envelope">Заявки</nav-item>
           <nav-item to="registries" icon="fas fa-dashboard">Реестр</nav-item>
+          <nav-item to="informationCenter" icon="far fa-bookmark">Информационный центр</nav-item>
         </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role === 'guest'">
           <nav-item to="Start" icon="fas fa-flag">Начать играть</nav-item>

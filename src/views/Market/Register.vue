@@ -111,7 +111,7 @@
       </div>
       <div class="card-body">
         <div class="form-group">
-          <label>Коммиссия (фиксированная)</label>
+          <label>Коммиссия (фиксированная) ₸</label>
           <input v-model="form.commission" type="number" min="1" name="commission" class="form-control" required>
           <small class="form-text text-muted">Комиссия(фиксированная) — держатель реестра имеет право взимать со сторон по сделке плату, которая определяется числом распоряжений о передаче прав и одинакова для всех юридических и физических лиц, <strong>но не может назначаться в виде процента от объема операции</strong>.</small>
         </div>
