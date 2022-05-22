@@ -15,7 +15,9 @@ import Credit from "../views/Bank/Credit"
 
 import Movements from "../views/Movement/Index"
 
-import RegistrarIndex from "../views/Registrar/Index"
+import PanelForRegistrar from "../views/Registrar/PanelForRegistrar"
+import Registries from "../views/Registrar/Registries"
+import InformationCenter from "../views/Registrar/InformationCenter"
 
 import Sectors from "../views/Sector/Index"
 import Quotes from "../views/Quote/Index"
@@ -67,9 +69,29 @@ const routes = [
     }
   },
   {
-    path: '/registrar',
-    name: 'RegistrarIndex',
-    component: RegistrarIndex,
+    path: '/panel-for-registrar',
+    name: 'PanelForRegistrar',
+    component: PanelForRegistrar,
+    meta: {
+
+    }
+  },
+  {
+    path: '/registries',
+    name: 'Registries',
+    component: Registries,
+    meta: {
+
+    }
+  },
+  {
+    path: '/registries/:ticker',
+    component: () => import("../views/Registrar/IssuerRegister")
+  },
+  {
+    path: '/information-center',
+    name: 'InformationCenter',
+    component: InformationCenter,
     meta: {
 
     }

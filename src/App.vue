@@ -36,7 +36,9 @@
 
           <li class="nav-header">Регистратор</li>
           <nav-item :to="{ name: 'Movements' }" icon="fas fa-arrow-right">Акциялар қозғалысы</nav-item>
-          <nav-item :to="{ name: 'RegistrarIndex' }" icon="fas fa-briefcase" v-if="user.role === 'registrar'">IPO қабылдау</nav-item>
+          <nav-item :to="{ name: 'PanelForRegistrar' }" icon="fas fa-briefcase" v-if="user.role === 'registrar'">IPO қабылдау</nav-item>
+          <nav-item :to="{ name: 'Registries' }" icon="fas fa-dashboard" v-if="user.role === 'registrar'">Реестр</nav-item>
+          <nav-item :to="{ name: 'InformationCenter' }" icon="far fa-bookmark" v-if="user.role === 'registrar'">Информационный центр</nav-item>
 
         </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role === 'guest'">
