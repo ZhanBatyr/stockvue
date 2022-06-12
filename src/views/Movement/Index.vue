@@ -44,6 +44,7 @@ export default {
     async getMovements() {
       await this.axios.get(PREFIX + "/movements").then(response => {
         if (response.status === 200) {
+          console.log(response.data)
           this.movements = response.data.movements
         }
       })

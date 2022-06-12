@@ -91,6 +91,22 @@
       </div>
     </div>
 
+    <div class="card" v-show="form.role === 'registrar'">
+      <div class="card-header">
+        <p class="card-title">Тіркеуші</p>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label>Коммиссия (фиксированная) ₸</label>
+          <input v-model="form.commission" type="number" min="1" name="commission" class="form-control" required>
+          <small class="form-text text-muted">тіркеуші мәміле тараптарынан аударымдық өкімдердің санымен айқындалатын
+            және барлық заңды және жеке тұлғалар үшін бірдей, бірақ <strong>мәміле көлемінен пайызбен алуға болмайтын </strong>
+            алым алуға құқылы</small>
+        </div>
+      </div>
+    </div>
+
+
     <button class="btn btn-success" v-if="form.role != null" @click="submit">Тіркелу</button>
     
   </div>
@@ -116,6 +132,7 @@ export default {
   },
   methods: {
     async submit() {
+      console.log(PREFIX)
       await this.axios.post(PREFIX + "/market/register", this.form).then(response => {
         if (response.status === 200) {
           console.log(response.data)
@@ -125,7 +142,7 @@ export default {
             this.$store.commit('setCompany', response.data)
           }
           
-          this.$notify({ type: 'success', title: 'Добро пожаловать!', text: 'Вы успешно зарегистрировались!' })
+          // this.$notify({ type: 'success', title: 'Добро пожаловать!', text: 'Вы успешно зарегистрировались!' })
           this.$router.push({ name: 'Index' })
         }
       }).catch(error => console.log(error))

@@ -109,7 +109,7 @@ export default {
     this.getStocks()
   },
   updated() {
-    const ctx = document.getElementById('transactions').getContext('2d');
+    // const ctx = document.getElementById('transactions').getContext('2d');
     
     const dates = []
     this.user?.transactions?.forEach(x => dates.push(new Date(Date.parse(x.transactionAt)).toLocaleDateString() + " " + new Date(Date.parse(x.transactionAt)).toLocaleTimeString()))
@@ -133,7 +133,7 @@ export default {
       type: 'line',
       data: data,
     };
-    const myChart = new Chart(ctx, config)
+    // const myChart = new Chart(ctx, config)
   },
   methods: {
     async getUser() {

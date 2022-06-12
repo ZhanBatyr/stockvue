@@ -1,20 +1,20 @@
 <template>
   <div class="companies content p-3">
     <h3 class="m-2">
-      Реестр "{{this.dataIssuers.find(d => d.ticker === $route.params.ticker).name}}"
+      Тізілім "{{this.dataIssuers.find(d => d.ticker === $route.params.ticker).name}}"
     </h3>
     <h5>
-      Всего пакет акции на рынке {{this.dataIssuers.find(d => d.ticker === $route.params.ticker).outputStocks}}
+      Нарықтағы барлық акциялар {{this.dataIssuers.find(d => d.ticker === $route.params.ticker).outputStocks}}
     </h5>
     <div class="card p-3">
       <table class="table table-dark table-striped">
         <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">ФИО</th>
+          <th scope="col">Аты жөні</th>
           <th scope="col">Эл. адрес</th>
           <th scope="col">Пакет акции(шт.)</th>
-          <th scope="col">Дата приобретения акции</th>
+          <th scope="col">Акцияны сатып алған дата</th>
           <th scope="col">Счет</th>
         </tr>
         </thead>

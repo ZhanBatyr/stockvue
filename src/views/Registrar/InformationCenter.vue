@@ -1,7 +1,7 @@
 <template>
   <div class="companies content p-3">
     <h3 class="m-2">
-      Предстоящие собрания
+      Болғалы тұрған жиналыстар
     </h3>
     <div class="card p-3">
       <div style="display:flex; flex-direction: column; justify-content: space-around; align-items: center"
@@ -11,21 +11,21 @@
         <div class="info-box d-flex justify-content-between" v-for="(i, ind) in issuers" :key="ind">
           <div class="info-box-content">
             <h3>Ticker: {{ i.ticker }}</h3>
-            <h2>Название: {{ i.name }}</h2>
-            <span class="info-box-text">Отрасль компании: {{ i.categoryCompany }}</span>
-            <span class="info-box-number">Количество всех акционеров: {{ i.allShareholders }}</span>
+            <h2>Аты: {{ i.name }}</h2>
+            <span class="info-box-text">Компания секторы: {{ i.categoryCompany }}</span>
+            <span class="info-box-number">Барлық акционерлер саны: {{ i.allShareholders }}</span>
           </div>
 
           <div class="info-box" style="width: 400px">
             <span class="info-sbox-icon bg-info"><i class="far fa-bookmark"></i></span>
             <div class="info-box-content">
-              <span class="info-box-text">Собрания</span>
-              <span class="info-box-number">Участвует {{i.participatingShareholders}} акционеры</span>
+              <span class="info-box-text">Жиналыс</span>
+              <span class="info-box-number">{{i.participatingShareholders}} акционерлер қатысады</span>
               <div class="progress">
                 <div class="progress-bar bg-info" :style="{ width: ((i.participatingShareholders / i.allShareholders) * 100).toFixed(2) + '%' }"></div>
               </div>
               <div class="progress-description">
-                у {{ ((i.participatingShareholders / i.allShareholders) * 100).toFixed(2)}}%  процентов акционеров есть больше процента акций
+                {{ ((i.participatingShareholders / i.allShareholders) * 100).toFixed(2)}}%  процент акционерлер компанияның 1%-тен көп акциясына иелік етеді
               </div>
             </div>
           </div>

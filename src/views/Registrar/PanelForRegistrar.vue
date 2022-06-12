@@ -1,7 +1,7 @@
 <template>
   <div class="companies content p-3">
     <h3 class="m-2">
-      Заявка акции эмитентов
+      Эмитенттерден келген акциялар сұранысы
     </h3>
     <div class="card p-3">
       <div style="display:flex; justify-content: space-around" class="mt-2">
@@ -19,9 +19,9 @@
           <!-- /.card-header -->
           <div class="card-body" v-if="selectedApplication">
             <h4>Ticker: {{ selectedApplication?.ticker }}</h4>
-            <div>Количество акции на биржу: {{selectedApplication?.outputStocks}}</div>
-            <div>Количество внутренних акции: {{selectedApplication?.inputStocks}}</div>
-            <div>Отрасль компании: {{selectedApplication?.categoryCompany}}</div>
+            <div>Нарықтағы акциялар саны: {{selectedApplication?.outputStocks}}</div>
+            <div>Ішкі акциялар саны: {{selectedApplication?.inputStocks}}</div>
+            <div>Компания секторы: {{selectedApplication?.categoryCompany}}</div>
 
             <div>
               Коэффициент роста: <span class="badge badge-danger">{{selectedApplication?.coef}} %</span>
@@ -30,8 +30,8 @@
           </div>
           <div class="card-footer" style="display: flex; justify-content: space-between" v-if="selectedApplication">
             <button type="button" class="btn btn-secondary btn-sm"
-                    data-bs-toggle="modal" data-bs-target="#exampleModal">Отклонить заявку</button>
-            <button type="button" class="btn btn-primary btn-sm">Отправить заявку к организатору рынка</button>
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">Сұранысты қайтару</button>
+            <button type="button" class="btn btn-primary btn-sm">Сұранысты нарық ұйымдастырушысына жіберу</button>
           </div>
         </div>
 
@@ -43,8 +43,8 @@
                 По умолчанию
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" @click="newApplications">Новые</a></li>
-                <li><a class="dropdown-item" href="#" @click="oldApplications">Старые</a></li>
+                <li><a class="dropdown-item" href="#" @click="newApplications">Жаңа</a></li>
+                <li><a class="dropdown-item" href="#" @click="oldApplications">Ескі</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
@@ -58,8 +58,8 @@
             <div class="info-box-content">
               <span class="badge badge-primary">{{ a.date }}</span>
               <span class="info-box-text">Ticker: {{ a.ticker }}</span>
-              <span class="info-box-text">Название: {{ a.name }}</span>
-              <span class="info-box-number">Количество акции: {{ a.outputStocks }}</span>
+              <span class="info-box-text">Эмитент аты: {{ a.name }}</span>
+              <span class="info-box-number">Акциялар саны: {{ a.outputStocks }}</span>
             </div>
           </div>
         </div>

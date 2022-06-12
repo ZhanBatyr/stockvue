@@ -47,7 +47,7 @@ const store = createStore({
         setUser(state, data) {
             state.user.username = data.user.username
             state.user.email = data.user.email
-            state.user.role = data.user.isGuest ? 'guest' : 'none'
+            state.user.role = data.user.isGuest ? 'guest' : data.user.role
             state.user.guest = data.user.isGuest
             state.user.id = data.user.id
             state.user.companyId = data.user.companyId

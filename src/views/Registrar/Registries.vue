@@ -13,38 +13,28 @@
           <li>
             <div style="width: 400px; display: flex; flex-direction: column; align-items: flex-start;">
               <div>
-                <div><b>Тикер эмитента</b></div>
-                <small class="form-text text-muted">Ти́кер (англ. ticker symbol) — краткое название в биржевой
-                  информации котируемых инструментов (акций, облигаций, индексов).</small>
+                <div><b>Эмитент тикері</b></div>
+                <small class="form-text text-muted">Тикер (ағыл. ticker символы) – баға белгіленетін құралдардың
+                  (акциялар, облигациялар, индекстер) биржа ақпаратындағы қысқаша атауы.</small>
                 <div class="input-group mb-3">
                   <span class="input-group-text" id="basic-addon1">#</span>
-                  <input type="text" class="form-control" placeholder="Ticker эмитента" aria-label="Ticker"
+                  <input type="text" class="form-control" placeholder="Эмитент тикері" aria-label="Ticker"
                          aria-describedby="basic-addon1" v-model="filterTicker">
                 </div>
               </div>
 
               <div>
-                <div><b>Название эмитента</b></div>
+                <div><b>Эмитент аты</b></div>
                 <div class="input-group input-group mb-3">
                   <input type="text" class="form-control" aria-label="Sizing example input"
-                         placeholder="Названия эмитента" aria-describedby="inputGroup-sizing-sm" v-model="filterName">
+                         placeholder="Эмитент аты" aria-describedby="inputGroup-sizing-sm" v-model="filterName">
                 </div>
               </div>
 
               <div>
-                <label for="sector">Отрасль</label>
+                <label for="sector">Сектор</label>
                 <select class="form-control" name="sector" id="sector" v-model="filterSector" required>
-                  <option value="28">Информационные технологии</option>
-                  <option value="13">Здравохранение</option>
-                  <option value="12">Потребительская дискреция</option>
-                  <option value="11">Финансы</option>
-                  <option value="10">Коммуникационные услуги</option>
-                  <option value="8">Индустрияльные</option>
-                  <option value="6">Потребительские товары</option>
-                  <option value="4">Энергия</option>
-                  <option value="3">Недвижимость</option>
-                  <option value="2">Материалы</option>
-                  <option value="1">Утилиты</option>
+                  <option v-for="s in dictSectors" :key="s.id" :value="s.bonus">{{s.name}}</option>
                 </select>
               </div>
 
@@ -52,8 +42,8 @@
           </li>
           <li>
             <div class="mt-2 d-flex justify-content-around">
-              <button type="button" class="btn btn-danger" @click="resetData">Сбросить</button>
-              <button type="button" class="btn btn-success" @click="findData">Применить</button>
+              <button type="button" class="btn btn-danger" @click="resetData">Қалпына келтіру</button>
+              <button type="button" class="btn btn-success" @click="findData">Қабылдау</button>
             </div>
           </li>
         </ul>
@@ -67,20 +57,20 @@
             <span class="badge badge-primary" style="width: 100px">{{ i.date }}</span>
             <h3>Ticker: {{ i.ticker }}</h3>
             <h2>Название: {{ i.name }}</h2>
-            <span class="info-box-text">Отрасль компании: {{ i.categoryCompany }}</span>
-            <span class="info-box-number">Количество акции: {{ i.outputStocks }}</span>
+            <span class="info-box-text">Компания секторы: {{ i.categoryCompany }}</span>
+            <span class="info-box-number">Акциялар саны: {{ i.outputStocks }}</span>
           </div>
 
           <div class="small-box bg-gradient-success" style="width: 200px">
             <div class="inner">
               <h4>{{ i.addUsers }}</h4>
-              <p>Пользователи зарегистрировались в этом реестре за последнии день</p>
+              <p>Қолданушылар бүгін осы реестрға тіркелген</p>
             </div>
             <div class="icon">
               <i class="fas fa-user-plus" style="width: 50px"></i>
             </div>
             <a class="small-box-footer" @click="pushRouter(i.ticker)">
-              Больше информации <i class="fas fa-arrow-circle-right"></i>
+              Көбірек ақпарат алу <i class="fas fa-arrow-circle-right"></i>
             </a>
           </div>
         </div>
@@ -91,23 +81,13 @@
 </template>
 
 <script>
+import {PREFIX} from "@/api";
+
 export default {
   name: "Registries",
   data() {
     return {
-      dictSectors: [
-        {value: 28, name: 'Информационные технологии'},
-        {value: 13, name: 'Здравохранение'},
-        {value: 12, name: 'Потребительская дискреция'},
-        {value: 11, name: 'Финансы'},
-        {value: 10, name: 'Коммуникационные услуги'},
-        {value: 8, name: 'Индустрияльные'},
-        {value: 6, name: 'Потребительские товары'},
-        {value: 4, name: 'Энергия'},
-        {value: 3, name: 'Недвижимость'},
-        {value: 2, name: 'Материалы'},
-        {value: 1, name: 'Утилиты'}
-      ],
+      dictSectors: [],
       curData: [
         {
           date: '2022-04-15',
@@ -164,11 +144,12 @@ export default {
       filtredData: [],
       filterTicker: null,
       filterName: null,
-      filterSector: 28
+      filterSector: null
     }
   },
   created() {
     this.issuers = this.curData;
+    this.get();
   },
   methods: {
     pushRouter(ticker) {
@@ -210,6 +191,14 @@ export default {
       this.filterTicker = null;
       this.filtredData = [];
       this.issuers = this.curData;
+    },
+    async get() {
+      await this.axios.get(PREFIX + "/sectors").then(response => {
+        if (response.status === 200) {
+          this.dictSectors = response.data
+          this.filterSector = this.dictSectors[0].bonus
+        }
+      })
     }
   }
 }
