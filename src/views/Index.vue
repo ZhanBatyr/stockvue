@@ -16,7 +16,7 @@
                     <label>Рөлі</label>
                     <input type="text" readonly class="form-control form-control-border" v-model="user.role">
                   </div>
-                  <div class="form-group">
+                  <div class="form-group" v-if="user.role !== 'clearing'">
                     <label>Аккаунтағы сомма</label>
                     <input :style="{ color: user?.transactions?.at(-1)?.change === '+' ? 'green' : 'red' }" type="text" readonly class="form-control form-control-border" :value="user.account?.amount">
                     <small class="text-form text-muted">тенге</small>
@@ -25,7 +25,7 @@
               </div>
           </div>
           <div class="col-9">
-            <div class="card" v-if="user.role !== 'registrar'">
+            <div class="card" v-if="user.role !== 'registrar' && user.role !== 'clearing'">
               <div class="card-header">
                 <p class="card-title">
                   Аккаунт өзгерісі
@@ -36,7 +36,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12" v-if="user.role !== 'broker' && user.role !== 'registrar'">
+          <div class="col-12" v-if="user.role !== 'broker' && user.role !== 'registrar' && user.role !== 'clearing'">
             <div class="card" >
               <div class="card-header">
                 <p class="card-title">
@@ -57,7 +57,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12" v-if="user.role !== 'broker' && user.role !== 'registrar'">
+          <div class="col-12" v-if="user.role !== 'broker' && user.role !== 'registrar' && user.role !== 'clearing'">
             <div class="card" >
               <div class="card-header">
                 <p class="card-title">
@@ -86,6 +86,47 @@
                   </tr>
                 </table>
               </div>
+            </div>
+          </div>
+          <div class="col-12" v-if="user.role === 'clearing'">
+            <div class="row">
+              <div class="col-lg-3 col-6">
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3>10</h3>
+                    <p>Қолданушылар</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <a href="#" class="small-box-footer">Барлық қолданушылар <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+              <div class="col-lg-3 col-6">
+                <div class="small-box bg-success">
+                  <div class="inner">
+                    <h3>5</h3>
+                    <p>Транзакциялар</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <a href="#" class="small-box-footer">Барлық транзакциялар <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+              <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                  <div class="inner">
+                    <h3>10</h3>
+                    <p>Құжаттар</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                  </div>
+                  <a href="#" class="small-box-footer">Барлық құжаттар <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+              
             </div>
           </div>
         </div>

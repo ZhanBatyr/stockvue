@@ -75,8 +75,6 @@ export default {
                 })
               }
             }
-
-            
             
             this.chart.series = [{
               data: data
@@ -224,6 +222,14 @@ export default {
       </div>
       <div class="card-body text-center">
         <h3 class="text-red">Эмитент-компания акция шығарған жоқ!</h3>
+      </div>
+    </div>
+    <div class="card" v-else-if="company.quote && !company.quote?.isAccepted">
+      <div class="card-header">
+        <p class="card-title">Эмитент-компанияның акциясы</p>
+      </div>
+      <div class="card-body text-center">
+        <h3 class="text-red">Эмитент-компания акциясы расталған жоқ!</h3>
       </div>
     </div>
     <div class="card" v-else>

@@ -17,6 +17,14 @@ import Movements from "../views/Movement/Index"
 
 import RegistrarIndex from "../views/Registrar/Index"
 
+import Dealer from "../views/FAQ"
+import Brokers from "../views/Market/Brokers"
+
+import ClearingUsers from "../views/Clearing/Users"
+import ClearingDeals from "../views/Clearing/Deals"
+import ClearingTransactions from "../views/Clearing/Transactions"
+import ClearingDocuments from "../views/Clearing/Documents"
+
 import Sectors from "../views/Sector/Index"
 import Quotes from "../views/Quote/Index"
 import CompanyProfile from "../views/Company/Profile"
@@ -43,6 +51,46 @@ const routes = [
     }
   },
   {
+    path: '/brokers',
+    name: 'Brokers',
+    component: Brokers,
+    meta: {
+
+    }
+  },
+  {
+    path: '/clearing/users',
+    name: 'ClearingUsers',
+    component: ClearingUsers,
+    meta: {
+
+    }
+  },
+  {
+    path: '/clearing/deals',
+    name: 'ClearingDeals',
+    component: ClearingDeals,
+    meta: {
+
+    }
+  },
+  {
+    path: '/clearing/documents',
+    name: 'ClearingDocuments',
+    component: ClearingDocuments,
+    meta: {
+
+    }
+  },
+  {
+    path: '/clearing/transactions',
+    name: 'ClearingTransactions',
+    component: ClearingTransactions,
+    meta: {
+
+    }
+  },
+  {
     path: '/orders',
     name: 'Orders',
     component: Orders,
@@ -62,6 +110,14 @@ const routes = [
     path: '/quotes',
     name: 'Quotes',
     component: Quotes,
+    meta: {
+
+    }
+  },
+  {
+    path: '/dealer',
+    name: 'Dealer',
+    component: Dealer,
     meta: {
 
     }

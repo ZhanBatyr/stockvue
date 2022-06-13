@@ -21,11 +21,11 @@
             <td>{{ order?.numberOfShares }}</td>
           </tr>
           <tr>
-            <td>Брокер</td>
+            <td>Дилер</td>
             <td>{{ order?.broker?.username }}</td>
           </tr>
           <tr>
-            <td>Брокер комиссиясы</td>
+            <td>Дилер комиссиясы</td>
             <td>{{ order?.broker?.commission }}</td>
           </tr>
           <tr>
