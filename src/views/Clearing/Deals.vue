@@ -7,15 +7,15 @@
       <div class="card-body">
         <div class="form-group">
           <label>Қолданушы 1</label>
-          <select name="" id="" class="form-control">
-            <option v-model="user1" value=""></option>
-          </select>
+<!--          <select name="" id="" class="form-control">-->
+<!--            <option v-model="user1" value=""></option>-->
+<!--          </select>-->
         </div>
         <div class="form-group">
           <label>Қолданушы 2</label>
-          <select name="" id="" class="form-control">
-            <option v-model="user2" value=""></option>
-          </select>
+<!--          <select name="" id="" class="form-control">-->
+<!--            <option v-model="user2" value=""></option>-->
+<!--          </select>-->
         </div>
         <div class="form-group">
           <label>Мәміле сипаттамасы</label>
