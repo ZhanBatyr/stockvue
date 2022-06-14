@@ -71,15 +71,15 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Отклонение заявки</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Өтінішті қабылдамау</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Вы действительно хотите отклонить заявку?
+              Қолданбадан бас тартқыңыз келетініне сенімдісіз бе?
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
-              <button type="button" class="btn btn-primary" @click="deleteApplication" data-bs-dismiss="modal">Да</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Жоқ</button>
+              <button type="button" class="btn btn-primary" @click="deleteApplication" data-bs-dismiss="modal">Иә</button>
             </div>
           </div>
         </div>
