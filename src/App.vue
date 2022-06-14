@@ -27,8 +27,14 @@
           <nav-item :to="{ name: 'Sectors' }" icon="fas fa-chart-pie">Секторлар</nav-item>
           <li class="nav-header" v-if="user.role === 'company'">Компания</li>
           <nav-item :to="{ name: 'CompanyProfile', params: { id: user.companyId } }" v-if="user.role === 'company'" icon="fas fa-building">Менің компаниям</nav-item>
+          
           <li class="nav-header" v-if="user.role === 'broker'">Брокер</li>
           <nav-item :to="{ name: 'Orders' }" v-if="user.role === 'broker'" icon="fas fa-briefcase">Менің тапсырыстарым</nav-item>
+          <nav-item :to="{ name: 'Brokers' }" v-if="user.role === 'broker'" icon="fas fa-briefcase">Брокерлер</nav-item>
+
+          <li class="nav-header" v-if="user.role === 'dealer'">Дилер</li>
+          <nav-item :to="{ name: 'Orders' }" v-if="user.role === 'dealer'" icon="fas fa-briefcase">Менің тапсырыстарым</nav-item>
+          <nav-item :to="{ name: 'Dealer' }" v-if="user.role === 'dealer'" icon="fas fa-faq">Сұрақ-жауап</nav-item>
 
           <li class="nav-header">Инвест. банк</li>
           <nav-item :to="{ name: 'Transactions' }" icon="fas fa-dollar">Транзакциялар</nav-item>
@@ -39,6 +45,13 @@
           <nav-item :to="{ name: 'PanelForRegistrar' }" icon="fas fa-briefcase" v-if="user.role === 'registrar'">IPO қабылдау</nav-item>
           <nav-item :to="{ name: 'Registries' }" icon="fas fa-dashboard" v-if="user.role === 'registrar'">Реестр</nav-item>
           <nav-item :to="{ name: 'InformationCenter' }" icon="far fa-bookmark" v-if="user.role === 'registrar'">Информационный центр</nav-item>
+
+          <li class="nav-header" v-if="user.role === 'clearing'">Клиринг</li>
+          <nav-item v-if="user.role === 'clearing'" :to="{ name: 'ClearingDeals' }" icon="fas fa-arrow-right">Мәмілелер</nav-item>
+          <nav-item v-if="user.role === 'clearing'" :to="{ name: 'ClearingUsers' }" icon="fas fa-arrow-right">Қатысушылар</nav-item>
+          <nav-item v-if="user.role === 'clearing'" :to="{ name: 'ClearingTransactions' }" icon="fas fa-arrow-right">Транзакциялар</nav-item>
+          <nav-item v-if="user.role === 'clearing'"  :to="{ name: 'ClearingDocuments' }" icon="fas fa-arrow-right">Құжаттар</nav-item>
+
 
         </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" v-if="logged && user.role === 'guest'">

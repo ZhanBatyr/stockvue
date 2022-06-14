@@ -22,7 +22,7 @@
             <td>{{ company.name }}</td>
             <td>{{ company.description }}</td>
             <td>{{ sectors?.at(index)?.name }}</td>
-            <td>{{ accounts?.at(index)?.amount }}</td>
+            <td >{{ accounts?.at(index)?.amount }}</td>
             <td>
               <router-link :to="{ name: 'CompanyProfile', params: { id: company.id } }" class="btn btn-success">Профиль</router-link>
             </td>
