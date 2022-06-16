@@ -1,39 +1,35 @@
 <template>
   <div class="companies content p-3">
     <h3 class="m-2">
-      Тізілім "{{this.dataIssuers.find(d => d.ticker === $route.params.ticker).name}}"
+      Тізілім {{this.issuerData[0].quote.symbol}}
     </h3>
     <h5>
-      Нарықтағы барлық акциялар {{this.dataIssuers.find(d => d.ticker === $route.params.ticker).outputStocks}}
+      Нарықтағы барлық акциялар {{allNumShares}}
     </h5>
     <div class="card p-3">
       <table class="table table-dark table-striped">
         <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Аты жөні</th>
-          <th scope="col">Эл. адрес</th>
-          <th scope="col">Пакет акции(шт.)</th>
-          <th scope="col">Акцияны сатып алған дата</th>
-          <th scope="col">Счет</th>
+          <th scope="col">№</th>
+          <th scope="col">Аты</th>
+          <th scope="col">Эл. почта</th>
+          <th scope="col">Роль</th>
+          <th scope="col">Акция саны</th>
+          <th scope="col">Қабылданды</th>
+          <th scope="col">Салынды</th>
+          <th scope="col">Жабылды</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Jhon Jhones</td>
-          <td>jhon@gmail.com</td>
-          <td>250</td>
-          <td>10-04-2022</td>
-          <td>QIWI</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Will Smith</td>
-          <td>will_smit@gmail.com</td>
-          <td>1500</td>
-          <td>23-10-2021</td>
-          <td>Pay pal</td>
+        <tr v-for="(f, ind) in finishData" :key="f.id">
+          <th scope="row">{{ind+1}}</th>
+          <td>{{ f.username }}</td>
+          <td>{{ f.email }}</td>
+          <td>{{ f.role }}</td>
+          <td>{{ f.numberOfShares }}</td>
+          <td>{{ f.isConfirmed }}</td>
+          <td>{{ f.placedAt }}</td>
+          <td>{{ f.closedAt }}</td>
         </tr>
         </tbody>
       </table>
@@ -42,67 +38,55 @@
 </template>
 
 <script>
+import {PREFIX} from "@/api";
+
 export default {
   name: "Registries",
   data() {
     return {
-      dataIssuers: [
-        {
-          date: '2022-04-15',
-          ticker: 'KZTK',
-          name: 'Казактелеком',
-          outputStocks: 400,
-          inputStocks: 4000,
-          categoryCompany: 'Связь',
-          coef: 12,
-          addUsers: 145
-        },
-        {
-          date: '2022-03-20',
-          ticker: 'KSPI',
-          name: 'Каспий банк',
-          outputStocks: 6000,
-          inputStocks: 14000,
-          categoryCompany: 'Информационные технологии',
-          coef: 18,
-          addUsers: 1596
-        },
-        {
-          date: '2022-01-10',
-          ticker: 'TSH',
-          name: 'Тенгиз "Шеврон"',
-          outputStocks: 1800,
-          inputStocks: 4000,
-          categoryCompany: 'Производства нефти',
-          coef: 9,
-          addUsers: 586
-        },
-        {
-          date: '2022-04-13',
-          ticker: 'KTZH',
-          name: 'Казакстан темір жолы',
-          outputStocks: 200,
-          inputStocks: 800,
-          categoryCompany: 'Железная дорога',
-          coef: 5,
-          addUsers: 58
-        },
-        {
-          date: '2022-02-02',
-          ticker: 'NIT',
-          name: 'НИТ',
-          outputStocks: 750,
-          inputStocks: 3800,
-          categoryCompany: 'Информационные технологии',
-          coef: 18,
-          addUsers: 105
-        }
-      ],
+      issuerData: [],
+      finishData: [],
+      quoteId: null,
+      allNumShares: 0,
       selectedApplication: null,
       selectedIndex: null
     }
   },
+  async created() {
+    this.quoteId = this.$route.params.quoteId
+    await this.getQuote()
+    await this.prepareData()
+  },
   methods: {
+    async getQuote() {
+      await this.axios.get(PREFIX + "/orders/quote/" + this.quoteId).then(response => {
+        if (response.status === 200) {
+          this.issuerData = response.data.orders
+        }
+      })
+    },
+    async prepareData() {
+      this.allNumShares = 0;
+      for (let i = 0; i < this.issuerData.length; i++) {
+        await this.axios.get(PREFIX + "/users/" + this.issuerData[i].userId).then(response => {
+          if (response.status === 200) {
+            const userInfo = response.data.user;
+            const infoObj = {
+              username: userInfo.username,
+              email: userInfo.email,
+              role: userInfo.role,
+              numberOfShares: this.issuerData[i].numberOfShares,
+              isConfirmed: this.issuerData[i].isConfirmed,
+              placedAt: this.issuerData[i].placedAt,
+              closedAt: this.issuerData[i].closedAt
+            }
+            this.allNumShares += this.issuerData[i].numberOfShares
+
+            this.finishData.push(infoObj)
+          }
+        })
+      }
+    }
   }
 }
 </script>

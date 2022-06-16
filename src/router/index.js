@@ -141,7 +141,7 @@ const routes = [
     }
   },
   {
-    path: '/registries/:ticker',
+    path: '/registries/:quoteId',
     component: () => import("../views/Registrar/IssuerRegister")
   },
   {

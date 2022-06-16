@@ -54,6 +54,7 @@
 
 
         <div class="info-box" v-for="i in data" :key="i.id">
+<!--          <div>{{i}}</div>-->
           <div class="info-box-content">
             <span class="badge badge-primary" style="width: 100px">{{ i.createdAt.split('T')[0] }}</span>
             <h3>Ticker: {{ i.symbol }}</h3>
@@ -64,13 +65,13 @@
 
           <div class="small-box bg-gradient-success" style="width: 200px">
             <div class="inner">
-              <h4>{{ i.company.employees }}</h4>
+              <h4>{{ i.buyEmployeesNum }}</h4>
               <p>Қолданушылар бүгін осы реестрға тіркелген</p>
             </div>
             <div class="icon">
               <i class="fas fa-user-plus" style="width: 50px"></i>
             </div>
-            <a class="small-box-footer" @click="pushRouter(i.symbol)">
+            <a class="small-box-footer" @click="pushRouter(i.id)">
               Көбірек ақпарат алу <i class="fas fa-arrow-circle-right"></i>
             </a>
           </div>
@@ -118,10 +119,17 @@ export default {
       this.data = [];
       for (let i = 0; i < this.issuers.length; i++) {
         await this.axios.get(PREFIX + "/companies/" + this.issuers[i].id)
-            .then(response => {
+            .then(async response => {
           if (response.status === 200) {
             const curData = response.data.quote
             curData.company.sectorName = this.sectors[i].name;
+            await this.axios.get(PREFIX + "/orders/quote/" + curData.id)
+                .then(response => {
+                  if (response.status === 200) {
+                    curData.buyEmployeesNum = response.data.orders.length
+                  }
+                })
+
             this.data.push(curData)
             this.curData.push(curData)
           }

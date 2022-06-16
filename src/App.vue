@@ -41,7 +41,7 @@
           <nav-item :to="{ name: 'Credits' }" icon="fas fa-dollar">Кредиттер</nav-item>
 
           <li class="nav-header" v-if="user.role === 'registrar'">Регистратор</li>
-          <nav-item :to="{ name: 'Movements' }" icon="fas fa-arrow-right" v-if="user.role === 'registrar'">Акциялар қозғалысы</nav-item>
+<!--          <nav-item :to="{ name: 'Movements' }" icon="fas fa-arrow-right" v-if="user.role === 'registrar'">Акциялар қозғалысы</nav-item>-->
           <nav-item :to="{ name: 'PanelForRegistrar' }" icon="fas fa-briefcase" v-if="user.role === 'registrar'">IPO қабылдау</nav-item>
           <nav-item :to="{ name: 'Registries' }" icon="fas fa-dashboard" v-if="user.role === 'registrar'">Реестр</nav-item>
           <nav-item :to="{ name: 'InformationCenter' }" icon="far fa-bookmark" v-if="user.role === 'registrar'">Информационный центр</nav-item>
